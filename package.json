@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "check-update-github": "0.0.4",
     "discord.js": "^12.1.1",
     "mongoose": "^5.9.7"
   }
