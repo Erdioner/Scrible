@@ -40,7 +40,7 @@ client.on('message', (message) => {
     const input = message.content.slice(data.PREFIX.length).split(' ');
     const command = input.shift().toLowerCase();
     const args = input;
-    if (coms.find( (com) => { return com.name == command; }) == undefined || command == 'help' || command == 'h') {
+    if (coms.find( (com) => { return com.name == command; }) == undefined && command != 'help' && command != 'h') {
       message.channel.send('No command named "' + command+'"').then((msg) => {msg.delete({ timeout:5000 })});
       if (message.deletable) {
         message.delete();
