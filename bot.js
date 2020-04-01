@@ -1,17 +1,3 @@
-var checkUpdate = require('check-update-github');
-var pkg = require('./package.json');
-
-checkUpdate({
-    name: pkg.name,
-    currentVersion: pkg.version,
-    user: 'Erdioner',
-    branch: 'master'
-    }, function(err, latestVersion, defaultMessage){
-    if(!err){
-        console.log(defaultMessage);
-    }
-});
-
 const data = require('./data.json');
 
 const fs = require('fs');
@@ -19,6 +5,27 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const coms = new Discord.Collection();
+
+var checkUpdate = require('check-update-github');
+var pkg = require('./package.json');
+
+client.on('ready', () => {
+	checkUpdate({
+	    name: pkg.name,
+	    currentVersion: pkg.version,
+	    user: 'Erdioner',
+	    branch: 'master'
+	    }, function(err, latestVersion, defaultMessage){
+	    if(!err){
+	        console.log(defaultMessage);
+					if (latestVersion != pkg.version) {
+						client.channels.fetch(data.NormalChannelId).then((channel) => {
+							channel.send("The latest version of Scrible is not equal the one used! Current: "+pkg.version+" | Latest: "+latestVersion)
+						}).catch(console.error);
+					}
+	    }
+	});
+});
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
