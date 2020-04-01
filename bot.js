@@ -40,26 +40,28 @@ client.on('message', (message) => {
     const input = message.content.slice(data.PREFIX.length).split(' ');
     const command = input.shift().toLowerCase();
     const args = input;
-    if (coms.find( (com) => { return com.name == command; }) == undefined && command != 'help' && command != 'h') {
+
+		if (command == 'help' || command == 'h') {
+			temp = '>?{Command & Usage} | {Description}\n'
+			coms.every( (com) => {
+				try {
+					temp += '>'+ com.usage + ' | ' + com.description + '\n';
+				} catch { return com == com; }
+				return com == com;
+			});
+			message.channel.send(temp);
+			message.delete();
+		}
+
+    if (command != 'h' && command != 'help' && coms.find( (com) => { return com.name == command; }) == undefined) {
       message.channel.send('No command named "' + command+'"').then((msg) => {msg.delete({ timeout:5000 })});
-      if (message.deletable) {
+			if (message.deletable) {
         message.delete();
       }
-    } else {
+    } else if (command != 'h' && command != 'help') {
       coms.get(command).execute(message, args);
     }
-    if (command == 'help' || command == 'h') {
-      temp = '>?{Command & Usage} | {Description}\n'
-      coms.every( (com) => {
-        try {
-          temp += '>'+ com.usage + ' | ' + com.description + '\n';
-        } catch { return com == com; }
-        return com == com;
-      });
-      message.channel.send(temp);
-    }
   }
-
 });
 
 client.login(data.TOKEN);
