@@ -1,3 +1,17 @@
+var checkUpdate = require('check-update-github');
+var pkg = require('./package.json');
+
+checkUpdate({
+    name: pkg.name,
+    currentVersion: pkg.version,
+    user: 'Erdioner',
+    branch: 'master'
+    }, function(err, latestVersion, defaultMessage){
+    if(!err){
+        console.log(defaultMessage);
+    }
+});
+
 const data = require('./data.json');
 
 const fs = require('fs');
