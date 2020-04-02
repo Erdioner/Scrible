@@ -80,7 +80,6 @@ client.on('message', (message) => {
 				args.push(temp2);
 
 			}
-			console.log(i + ' | ' + j + ' | ' + args)
 		}
 
 		if (command == 'help' || command == 'h') {

@@ -14,7 +14,11 @@ module.exports = {
           temp += scrible.data[i];
         }
       }
-      message.channel.send('All custom words are: \n'+temp).then((msg) => {msg.delete({ timeout:60000 })});;
+      if (temp != '') {
+        message.channel.send('All custom words are: \n'+temp).then((msg) => {msg.delete({ timeout:60000 })});
+      } else {
+        message.channel.send('No custom words in list').then((msg) => {msg.delete({ timeout:5000 })});
+      }
       message.delete();
     });
   }
