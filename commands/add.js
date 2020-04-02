@@ -1,7 +1,7 @@
 const Scrible = require('../models/scrible.js');
 module.exports = {
   name: 'add',
-  usage: '?add [, words; separated by spaces]',
+  usage: '?add [, words; separated by spaces and words with spaces: "An example"]',
   description: 'Add word(-s) to the custom words list.',
   execute(message, args) {
     args = [...new Set(args)];
@@ -14,11 +14,11 @@ module.exports = {
     temp = '';
     for (var i = 0; i < args.length; i++) {
       if (i < args.length-2) {
-        temp += args[i] + ', ';
-      } else if (i == args.length-2) {
-        temp += args[i] + ' and '
+        temp += '"'+args[i] + '", ';
+      } else if (i == args.length-1 && args.length != 1) {
+        temp += '"'+args[i] + '" and '
       } else {
-        temp += args[i];
+        temp += '"'+args[i]+'"';
       }
     }
     message.channel.send('Added: ' + temp).then((msg) => {msg.delete({ timeout:10000 })});;
