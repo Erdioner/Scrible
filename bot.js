@@ -58,7 +58,7 @@ client.once('ready', () => {
 
 client.on('message', (message) => {
 	if (message.content.startsWith(data.PREFIX)) {
-    const input = message.content.slice(data.PREFIX.length).split(' ');
+    const input = message.content.toLowerCase().slice(data.PREFIX.length).split(' ');
     const command = input.shift().toLowerCase();
     const args = input;
 
