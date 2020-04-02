@@ -62,6 +62,27 @@ client.on('message', (message) => {
     const command = input.shift().toLowerCase();
     const args = input;
 
+		for (var i = 0; i < args.length; i++) {
+			if (args[i].startsWith('"')) {
+				for (var j = 0; j < args.length; j++) {
+					if (args[j].endsWith('"')) {
+						break;
+					}
+				}
+				temp = args.splice(i, j-i+1);
+				temp2 = '';
+				for (var k = 0; k < temp.length; k++) {
+					temp[k] = temp[k].replace(/["]+/g, '');
+					if (k < temp.length-1) {
+						temp2 += temp[k] + ' ';
+					} else { temp2 += temp[k]; }
+				}
+				args.push(temp2);
+
+			}
+			console.log(i + ' | ' + j + ' | ' + args)
+		}
+
 		if (command == 'help' || command == 'h') {
 			temp = '>?{Command & Usage} | {Description}\n'
 			coms.every( (com) => {
