@@ -18,7 +18,7 @@ client.on('ready', () => {
 	    }, function(err, latestVersion, defaultMessage){
 	    if(!err){
 	        console.log(defaultMessage);
-					if (latestVersion != pkg.version) {
+					if (latestVersion != pkg.version && data.NormalChannelId != '') {
 						client.channels.fetch(data.NormalChannelId).then((channel) => {
 							channel.send("The latest version of Scrible is not equal the one used! Current: "+pkg.version+" | Latest: "+latestVersion)
 						}).catch(console.error);
