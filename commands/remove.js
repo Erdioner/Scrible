@@ -17,7 +17,7 @@ module.exports = {
     for (var i = 0; i < args.length; i++) {
       if (i < args.length-2) {
         temp += args[i] + ', ';
-      } else if (i == args.length-1) {
+      } else if (i == args.length-1 && args.length != 1) {
         temp += args[i] + ' and '
       } else {
         temp += args[i];
